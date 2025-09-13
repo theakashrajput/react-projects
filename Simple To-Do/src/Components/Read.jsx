@@ -1,5 +1,3 @@
-import React from "react";
-
 const Read = ({ tasks, setTasks }) => {
   const renderTasks = tasks.map((ele) => {
     return (
@@ -8,7 +6,11 @@ const Read = ({ tasks, setTasks }) => {
         key={ele.id}
         className="w-full bg-zinc-100 px-5 py-5 rounded-md font-semibold flex items-center justify-between border-[1px] border-solid border-black gap-4"
       >
-        <span className="inline-block text-xl grow text-start">
+        <span
+          className={`inline-block text-xl grow text-start ${
+            ele.isCompleted ? "line-through" : ""
+          }`}
+        >
           {ele.title}
         </span>
         <button
@@ -17,12 +19,28 @@ const Read = ({ tasks, setTasks }) => {
         >
           Delete
         </button>
+        <input
+          onChange={(e) => handleChecked(e, ele.id)}
+          type="checkbox"
+          name="task-status"
+          id="task-status"
+        />
       </li>
     );
   });
 
   const deleteHandler = (id) => {
     const updatedTasks = tasks.filter((ele) => ele.id !== id);
+    setTasks(updatedTasks);
+  };
+
+  const handleChecked = (e, id) => {
+    const updatedTasks = tasks.map((ele) => {
+      if (ele.id == id) {
+        ele.isCompleted = e.target.checked;
+      }
+      return ele;
+    });
     setTasks(updatedTasks);
   };
 
