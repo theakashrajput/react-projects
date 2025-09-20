@@ -83,7 +83,7 @@ const SignUp = () => {
         </form>
       </div>
       {newUser && (
-        <pre className="bg-gray-100 p-4 rounded-md max-w-lg overflow-hidden text-wrap">
+        <pre className="bg-gray-100 p-4 rounded-md max-w-lg overflow-auto">
           {JSON.stringify(newUser, null, 2)}
         </pre>
       )}
