@@ -1,12 +1,35 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="w-full py-5 px-10 flex justify-center gap-10 bg-gray-800 text-white">
-      <Link to="/">Home</Link>
-      <Link to="/service">Service</Link>
-      <Link to="/about">About</Link>
-      <Link to="/contact">Contact</Link>
+    <div className="w-full absolute top-0 left-0 py-5 px-10 flex justify-center gap-10 bg-gray-800 text-white">
+      <NavLink className={(e) => (e.isActive ? "text-red-500" : "")} to="/">
+        Home
+      </NavLink>
+      <NavLink
+        className={(e) => (e.isActive ? "text-red-500" : "")}
+        to="/products"
+      >
+        Products
+      </NavLink>
+      <NavLink
+        className={(e) => (e.isActive ? "text-red-500" : "")}
+        to="/services"
+      >
+        Services
+      </NavLink>
+      <NavLink
+        className={(e) => (e.isActive ? "text-red-500" : "")}
+        to="/about"
+      >
+        About
+      </NavLink>
+      <NavLink
+        className={(e) => (e.isActive ? "text-red-500" : "")}
+        to="/contact"
+      >
+        Contact
+      </NavLink>
     </div>
   );
 };
