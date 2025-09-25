@@ -6,9 +6,9 @@ const Recipes = () => {
   const { recipeData, setRecipeData } = useContext(recipeContext);
 
   return (
-    <div className="pb-5 px-10 pt-30 grid grid-cols-4 gap-5 overflow-y-scroll">
+    <div className="pb-5 px-2 sm:px-4 md:px-10 md:pt-28 pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {recipeData.map((ele) => (
-        <RecipeCard key={recipeData.id} recipe={ele} />
+        <RecipeCard key={ele.id} recipe={ele} />
       ))}
     </div>
   );
