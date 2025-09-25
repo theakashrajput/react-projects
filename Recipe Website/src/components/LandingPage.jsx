@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const LandingPage = () => {
+  const navigation = useNavigate();
   return (
     <div className="w-full h-full pt-20 flex  bg-zinc-100">
       <div className="w-[60%] p-20">
@@ -11,7 +14,10 @@ const LandingPage = () => {
           <br />
           Recipes
         </h2>
-        <button className="bg-[#e15b0e] py-4 px-6 text-lg font-semibold text-[#F8F5EC] mt-10 rounded-md cursor-pointer active:scale-95 hover:bg-[#e13e0e]">
+        <button
+          onClick={()=>navigation("/recipes")}
+          className="bg-[#e15b0e] py-4 px-6 text-lg font-semibold text-[#F8F5EC] mt-10 rounded-md cursor-pointer active:scale-95 hover:bg-[#e13e0e]"
+        >
           Find Recipes 🔎
         </button>
       </div>

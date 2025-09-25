@@ -3,7 +3,7 @@ const RecipeCard = ({ recipe }) => {
   console.log(recipe);
 
   return (
-    <div className="w-[330px] bg-[#F8F5EC] rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+    <div className="max-w-sm bg-[#F8F5EC] rounded-2xl shadow-lg overflow-hidden border border-gray-200">
       <img
         src={recipe.image}
         alt={recipe.recipeName}

@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 
 const CreateRecipe = () => {
   const { recipeData, setRecipeData } = useContext(recipeContext);
+
   const {
     register,
     reset,
@@ -20,10 +21,7 @@ const CreateRecipe = () => {
       ingredients: data.ingredients.split(",").map((item) => item.trim()),
       instructions: data.instructions.split(",").map((item) => item.trim()),
     };
-
     setRecipeData([...recipeData, newRecipe]);
-
-    // setRecipeData([...recipeData, newRecipe]);
     reset();
   };
 
