@@ -4,14 +4,14 @@ const RecipeCard = ({ recipe }) => {
   const navigation = useNavigate();
 
   return (
-    <div className="max-w-sm w-full bg-[#F8F5EC] rounded-2xl shadow-lg overflow-hidden border border-gray-200 mx-auto sm:max-w-xs md:max-w-sm lg:max-w-md">
+    <div className="max-w-sm w-full bg-[#F8F5EC] rounded-2xl shadow-lg overflow-hidden border border-gray-200 mx-auto sm:max-w-xs md:max-w-sm lg:max-w-md flex flex-col h-full">
       <img
         src={recipe.image}
         alt={recipe.recipeName}
         className="h-40 sm:h-44 md:h-52 w-full object-cover object-center"
       />
-
-      <div className="p-2 sm:p-3 md:p-4">
+ 
+      <div className="p-2 sm:p-3 md:p-4 flex flex-col flex-1 items-baseline">
         {/* Title */}
         <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#50413C] mb-2">
           {recipe.recipeName}
@@ -47,12 +47,14 @@ const RecipeCard = ({ recipe }) => {
         </p>
 
         {/* Button */}
-        <button
-          onClick={() => navigation(`/recipes/${recipe.id}`)}
-          className="w-full py-2 cursor-pointer rounded-xl font-semibold text-white bg-[#F5834D] hover:bg-[#e66f37] active:scale-95 transition text-sm sm:text-base"
-        >
-          View Full Recipe
-        </button>
+        <div className="mt-auto w-full">
+          <button
+            onClick={() => navigation(`/recipes/${recipe.id}`)}
+            className="w-full py-2 cursor-pointer rounded-xl font-semibold text-white bg-[#F5834D] hover:bg-[#e66f37] active:scale-95 transition text-sm sm:text-base"
+          >
+            View Full Recipe
+          </button>
+        </div>
       </div>
     </div>
   );

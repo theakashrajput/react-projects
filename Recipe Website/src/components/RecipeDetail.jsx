@@ -1,18 +1,26 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { recipeContext } from "../context/RecipeContext";
+import UpdateForm from "./UpdateForm";
 
 const RecipeDetail = () => {
   const params = useParams();
 
-  const { recipeData, setRecipeData } = useContext(recipeContext);
+  const { recipeData } = useContext(recipeContext);
 
   const recipe = recipeData.find((ele) => ele.id === params.id);
 
+  if (!recipe)
+    return (
+      <p className="w-full h-screen flex items-center justify-center text-5xl">
+        404 Not Found
+      </p>
+    );
+
   return (
-    <div className="h-screen w-full pt-28 px-5">
-      <div className="recipe-detail p-5 h-full w-full md:w-1/2">
-        <div className="h-full w-full md:w-[40vw] bg-[#F8F5EC] rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+    <div className="h-screen w-full pt-23 px-5 flex">
+      <div className="recipe-detail p-5 h-full w-full md:w-3/5">
+        <div className="h-full w-full  bg-[#F8F5EC] rounded-2xl shadow-lg overflow-hidden border border-gray-200">
           <div className="flex flex-col md:flex-row h-auto md:h-2/5">
             {/* Image */}
             <div className="w-full md:w-1/2 h-48 md:h-full mr-0 md:mr-2">
@@ -71,8 +79,9 @@ const RecipeDetail = () => {
           </div>
         </div>
       </div>
-
-      <div className="recipe-update-form"></div>
+      <div className="recipe-update-form w-2/5 p-5">
+        <UpdateForm recipe={recipe} />
+      </div>
     </div>
   );
 };
