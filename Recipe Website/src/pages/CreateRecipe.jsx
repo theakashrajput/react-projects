@@ -3,6 +3,7 @@ import Input from "../components/Input";
 import { useContext } from "react";
 import { recipeContext } from "../context/RecipeContext";
 import { nanoid } from "nanoid";
+import { toast } from "react-toastify";
 
 const CreateRecipe = () => {
   const { recipeData, setRecipeData } = useContext(recipeContext);
@@ -22,6 +23,7 @@ const CreateRecipe = () => {
       instructions: data.instructions.split(",").map((item) => item.trim()),
     };
     setRecipeData([...recipeData, newRecipe]);
+    toast.success("Recipe created successfully");
     reset();
   };
 

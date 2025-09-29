@@ -3,14 +3,17 @@ import Input from "./Input";
 import { useContext } from "react";
 import { recipeContext } from "../context/RecipeContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateForm = ({ recipe }) => {
   const { recipeData, setRecipeData } = useContext(recipeContext);
   const navigation = useNavigate();
+
   const deleteHandler = (id) => {
     const updatedRecipeData = recipeData.filter((ele) => ele.id !== id);
     setRecipeData(updatedRecipeData);
     navigation("/recipes");
+    toast.success("Recipe deleted successfully");
   };
 
   const {
@@ -47,6 +50,7 @@ const UpdateForm = ({ recipe }) => {
           : ele
       )
     );
+    toast.success("Recipe updated successfully");
   };
 
   return (
@@ -192,6 +196,13 @@ const UpdateForm = ({ recipe }) => {
             type="button"
           >
             Delete
+          </button>
+          <button
+            onClick={() => navigation("/recipes")}
+            className="mt-5 block font-semibold text-lg leading-none tracking-wide px-4 py-3 rounded bg-gray-600 text-[#F8F5EC] cursor-pointer active:scale-95 hover:bg-gray-800 transition duration-300"
+            type="button"
+          >
+            Back
           </button>
         </div>
       </form>
