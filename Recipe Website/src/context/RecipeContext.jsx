@@ -1,9 +1,24 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export const recipeContext = createContext(null);
 
 const RecipeContext = (props) => {
-  const [recipeData, setRecipeData] = useState([
-    {
+  const [recipeData, setRecipeData] = useState([]);
+  useEffect(() => {
+    const recipes = localStorage.getItem("recipes");
+    setRecipeData(recipes ? JSON.parse(recipes) : []);
+  }, []);
+
+  return (
+    <recipeContext.Provider value={{ recipeData, setRecipeData }}>
+      {props.children}
+    </recipeContext.Provider>
+  );
+};
+
+export default RecipeContext;
+
+/* 
+{
       id: "cdsncksncknzcnmxc",
       image:
         "https://pipingpotcurry.com/wp-content/uploads/2022/04/Matar-Paneer-in-instant-pot-Piping-Pot-Curry-1024x1024.jpg",
@@ -51,13 +66,4 @@ const RecipeContext = (props) => {
         `Serve hot with coconut chutney and sambar.`,
       ],
     },
-  ]);
-
-  return (
-    <recipeContext.Provider value={{ recipeData, setRecipeData }}>
-      {props.children}
-    </recipeContext.Provider>
-  );
-};
-
-export default RecipeContext;
+*/

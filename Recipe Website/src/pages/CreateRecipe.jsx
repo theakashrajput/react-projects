@@ -1,13 +1,12 @@
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { recipeContext } from "../context/RecipeContext";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 
 const CreateRecipe = () => {
   const { recipeData, setRecipeData } = useContext(recipeContext);
-
   const {
     register,
     reset,
@@ -22,10 +21,19 @@ const CreateRecipe = () => {
       ingredients: data.ingredients.split(",").map((item) => item.trim()),
       instructions: data.instructions.split(",").map((item) => item.trim()),
     };
-    setRecipeData([...recipeData, newRecipe]);
+    const temp = [...recipeData];
+    temp.push(newRecipe);
+    setRecipeData(temp);
+    localStorage.setItem("recipes", JSON.stringify(temp));
     toast.success("Recipe created successfully");
     reset();
   };
+
+  // useEffect(() => {
+  //   if(recipeData>0){
+  //     localStorage.setItem("recipes", recipeData);
+  //   }
+  // }, [recipeData]);
 
   return (
     <div className="pt-28 px-20">

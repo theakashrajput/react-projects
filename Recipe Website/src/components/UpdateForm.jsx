@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import Input from "./Input";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { recipeContext } from "../context/RecipeContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ const UpdateForm = ({ recipe }) => {
   const deleteHandler = (id) => {
     const updatedRecipeData = recipeData.filter((ele) => ele.id !== id);
     setRecipeData(updatedRecipeData);
+    localStorage.setItem("recipes", JSON.stringify(updatedRecipeData)); // <-- update localStorage immediately
     navigation("/recipes");
     toast.success("Recipe deleted successfully");
   };
@@ -29,7 +30,7 @@ const UpdateForm = ({ recipe }) => {
           time: recipe.time,
           ingredients: recipe.ingredients,
           instructions: recipe.instructions,
-          detailedIntructions: recipe.detailedIntructions.join("\n"),
+          // detailedIntructions: recipe.detailedIntructions.join("\n"),
           food_categories: recipe.food_categories,
         }
       : {},
@@ -42,16 +43,20 @@ const UpdateForm = ({ recipe }) => {
           ? {
               ...ele,
               ...updatedData,
-              detailedIntructions: updatedData.detailedIntructions
-                .split("\n")
-                .map((ele) => ele.trim())
-                .filter(Boolean),
+              // detailedIntructions: updatedData.detailedIntructions
+              //   .split("\n")
+              //   .map((ele) => ele.trim())
+              //   .filter(Boolean),
             }
           : ele
       )
     );
     toast.success("Recipe updated successfully");
   };
+
+  useEffect(() => {
+    localStorage.setItem("recipes", JSON.stringify(recipeData));
+  }, [recipeData]);
 
   return (
     <>
@@ -134,7 +139,7 @@ const UpdateForm = ({ recipe }) => {
             errors: errors,
           }}
         />
-        <Input
+        {/* <Input
           data={{
             as: "textarea",
             label: "Detailed Instructions",
@@ -146,7 +151,7 @@ const UpdateForm = ({ recipe }) => {
             register: register,
             errors: errors,
           }}
-        />
+        /> */}
         <div className="mt-2 mb-4">
           <label
             htmlFor="food_categories"

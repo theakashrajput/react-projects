@@ -10,7 +10,7 @@ const RecipeCard = ({ recipe }) => {
         alt={recipe.recipeName}
         className="h-40 sm:h-44 md:h-52 w-full object-cover object-center"
       />
- 
+
       <div className="p-2 sm:p-3 md:p-4 flex flex-col flex-1 items-baseline">
         {/* Title */}
         <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#50413C] mb-2">
@@ -35,7 +35,9 @@ const RecipeCard = ({ recipe }) => {
           Ingredients:
         </h3>
         <p className="text-xs sm:text-sm text-gray-700 mb-3">
-          {recipe.ingredients}
+          {recipe.ingredients.map((ele, idx) => (
+            <span key={idx}>{ele}, </span>
+          ))}
         </p>
 
         {/* Instructions */}
@@ -43,7 +45,9 @@ const RecipeCard = ({ recipe }) => {
           Instructions:
         </h3>
         <p className="text-xs sm:text-sm text-gray-700 mb-4">
-          {recipe.instructions}
+          {recipe.instructions.map((ele, idx) => (
+            <span key={idx}>{ele}, </span>
+          ))}
         </p>
 
         {/* Button */}

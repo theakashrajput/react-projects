@@ -1,14 +1,12 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { recipeContext } from "../context/RecipeContext";
 import UpdateForm from "./UpdateForm";
 
 const RecipeDetail = () => {
   const params = useParams();
-
-  const { recipeData } = useContext(recipeContext);
-
-  const recipe = recipeData.find((ele) => ele.id === params.id);
+  const { recipeData = [] } = useContext(recipeContext);
+  const recipe = recipeData?.find((ele) => ele.id === params.id);
 
   if (!recipe)
     return (
@@ -67,14 +65,14 @@ const RecipeDetail = () => {
               Instructions:
             </h3>
             <div className="w-full h-48 md:h-full overflow-auto pr-2 scrollbar-thin scrollbar-thumb-[#F5834D] scrollbar-track-[#F8F5EC] rounded">
-              {recipe.detailedIntructions.map((ele, idx) => (
+              {/* {recipe.detailedIntructions.map((ele, idx) => (
                 <p
                   key={idx}
                   className="text-gray-700 mb-2 leading-relaxed text-sm"
                 >
                   {idx + 1}. {ele}
                 </p>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
