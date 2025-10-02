@@ -12,9 +12,18 @@ const UpdateForm = ({ recipe }) => {
   const deleteHandler = (id) => {
     const updatedRecipeData = recipeData.filter((ele) => ele.id !== id);
     setRecipeData(updatedRecipeData);
-    localStorage.setItem("recipes", JSON.stringify(updatedRecipeData)); // <-- update localStorage immediately
+    localStorage.setItem("recipes", JSON.stringify(updatedRecipeData));
     navigation("/recipes");
     toast.success("Recipe deleted successfully");
+  };
+
+  const favouriteHandler = (id) => {
+    const updatedData = recipeData.map((ele) => {
+      return ele.id === id
+        ? { ...ele, favourite: ele.favourite ? false : true }
+        : ele;
+    });
+    setRecipeData(updatedData);
   };
 
   const {
@@ -97,7 +106,7 @@ const UpdateForm = ({ recipe }) => {
         />
         <Input
           data={{
-            label: "Durartion",
+            label: "Duration",
             type: "number",
             placeholder: "TOTAL TIME (In minutes)",
             name: "time",
@@ -201,6 +210,13 @@ const UpdateForm = ({ recipe }) => {
             type="button"
           >
             Delete
+          </button>
+          <button
+            onClick={() => favouriteHandler(recipe.id)}
+            className="mt-5 block font-semibold text-lg leading-none tracking-wide px-4 py-3 rounded bg-pink-500 text-[#F8F5EC] cursor-pointer active:scale-95 hover:bg-pink-700 transition duration-300"
+            type="button"
+          >
+            {recipe.favourite ? "Remove Favourite" : "Add to Favourite"}
           </button>
           <button
             onClick={() => navigation("/recipes")}
